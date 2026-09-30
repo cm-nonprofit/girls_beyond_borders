@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Girls Beyond Borders — Project Firefly</title>
+<meta name="description" content="Project Firefly, the Myanmar Girls Education Initiative by Girls Beyond Borders. Find the girls. Understand the barriers. Build a path back to school.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF7F0;        /* warm paper */
+  --surface:#FFFFFF;
+  --text:#1B1F2E;      /* deep ink */
+  --muted:#565B6B;
+  --primary:#0A6A93;   /* GBB field-shirt blue, darkened for contrast */
+  --secondary:#16284A; /* night navy */
+  --accent:#F2B33D;    /* firefly amber */
+  --donate:#E0482A;    /* vermilion */
+  --donate-hover:#C63A1F;
+  --line:rgba(27,31,46,.12);
+  --glass:rgba(255,255,255,.62);
+  --glass-dark:rgba(22,40,74,.55);
+  --radius:20px;
+  --radius-lg:28px;
+  --shadow:0 18px 40px -18px rgba(22,40,74,.35);
+  --font-head:"Fraunces", Georgia, "Times New Roman", serif;
+  --font-body:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --max:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.65;font-size:17px;-webkit-font-smoothing:antialiased}
+img,video,svg{display:block;max-width:100%}
+a{color:var(--primary)}
+h1,h2,h3{font-family:var(--font-head);line-height:1.1;letter-spacing:-.015em}
+h2{font-size:clamp(2rem,4.4vw,3.3rem);font-weight:800}
+h3{font-size:1.35rem;font-weight:700}
+.container{width:min(100% - 32px,var(--max));margin-inline:auto}
+section{padding:clamp(72px,10vw,128px) 0;position:relative}
+.kicker{display:inline-flex;align-items:center;gap:10px;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--primary);margin-bottom:18px}
+.kicker::before{content:"";width:28px;height:2px;background:currentColor}
+.lead{font-size:clamp(1.08rem,1.6vw,1.25rem);color:var(--muted);max-width:62ch}
+.skip{position:absolute;left:-999px;top:8px;background:var(--secondary);color:#fff;padding:10px 16px;border-radius:10px;z-index:200}
+.skip:focus{left:16px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+.split>*,.hero-inner>*,.films>*,.form-wrap>*,.donate-grid>*,.index-wrap>*,.cards>*{min-width:0}
+body{overflow-x:hidden}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:999px;font:600 1rem var(--font-body);text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .2s,background .2s,box-shadow .2s,color .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:#085577;box-shadow:var(--shadow)}
+.btn-ghost{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.55);backdrop-filter:blur(8px)}
+.btn-ghost:hover{background:rgba(255,255,255,.22)}
+.btn-donate{background:var(--donate);color:#fff;box-shadow:0 10px 24px -10px rgba(224,72,42,.8)}
+.btn-donate:hover{background:var(--donate-hover)}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;inset:0 0 auto 0;z-index:100;transition:background .3s,box-shadow .3s}
+.nav.scrolled{background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);box-shadow:0 1px 0 var(--line)}
+.nav .container{display:flex;align-items:center;justify-content:space-between;height:72px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font:800 1.15rem var(--font-head)}
+.nav.scrolled .brand{color:var(--secondary)}
+.brand small{display:block;font:600 .66rem var(--font-body);letter-spacing:.16em;text-transform:uppercase;opacity:.75}
+.nav-links{display:flex;align-items:center;gap:6px;list-style:none}
+.nav-links a{color:#fff;text-decoration:none;font-weight:600;font-size:.88rem;letter-spacing:.08em;padding:10px 14px;border-radius:999px;transition:background .2s}
+.nav.scrolled .nav-links a{color:var(--text)}
+.nav-links a:hover{background:rgba(255,255,255,.18)}
+.nav.scrolled .nav-links a:hover{background:rgba(10,106,147,.1)}
+.nav-links a.btn-donate,.nav.scrolled .nav-links a.btn-donate{color:#fff;padding:10px 20px;margin-left:6px}
+.menu-btn{display:none;background:none;border:0;color:#fff;cursor:pointer;padding:8px}
+.nav.scrolled .menu-btn{color:var(--secondary)}
+@media (max-width:760px){
+  .menu-btn{display:block}
+  .nav-links{position:absolute;top:72px;left:16px;right:16px;flex-direction:column;align-items:stretch;background:var(--surface);border-radius:var(--radius);padding:12px;box-shadow:var(--shadow);display:none}
+  .nav-links.open{display:flex}
+  .nav-links a,.nav.scrolled .nav-links a{color:var(--text);padding:14px}
+  .nav-links a.btn-donate{margin:6px 0 0}
+}
+
+/* ---------- hero ---------- */
+#home{min-height:clamp(640px,100vh,1000px);min-height:clamp(640px,100svh,1000px);display:flex;align-items:flex-end;padding:140px 0 72px;color:#fff;overflow:hidden;background:var(--secondary)}
+.hero-bg{position:absolute;inset:-6% 0 0 0;background:url("assets/img/hero.jpg") 72% 22%/cover no-repeat;will-change:transform}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,20,38,.5) 0%,rgba(12,20,38,0) 22%,rgba(12,20,38,0) 60%,rgba(12,20,38,.85) 100%),linear-gradient(90deg,rgba(12,20,38,.9) 0%,rgba(12,20,38,.7) 38%,rgba(12,20,38,.1) 68%,rgba(12,20,38,0) 100%)}
+@media (max-width:760px){.hero-bg::after{background:linear-gradient(180deg,rgba(12,20,38,.55) 0%,rgba(12,20,38,.72) 40%,rgba(12,20,38,.94) 100%)}}
+.fireflies{position:absolute;inset:0;pointer-events:none}
+.hero-inner{position:relative;display:grid;gap:40px;grid-template-columns:minmax(0,1fr)}
+.hero-inner>div{max-width:720px}
+.hero-tag{display:inline-block;background:rgba(242,179,61,.18);border:1px solid rgba(242,179,61,.55);color:#FFE3A6;padding:7px 14px;border-radius:999px;font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:22px}
+#home h1{font-size:clamp(2.4rem,5.6vw,4.4rem);text-shadow:0 2px 24px rgba(0,0,0,.35);font-weight:800}
+#home h1 em{font-style:italic;color:var(--accent)}
+.hero-sub{font-size:clamp(1.05rem,1.8vw,1.3rem);max-width:56ch;margin:22px 0 32px;color:rgba(255,255,255,.9)}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px}
+
+/* ---------- divider ---------- */
+.divider{height:70px;margin-top:-1px;color:var(--bg)}
+.divider svg{width:100%;height:100%}
+
+/* ---------- problem ---------- */
+.split{display:grid;gap:48px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:900px){.split{grid-template-columns:1fr 1fr;align-items:center}}
+.photo{border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);position:relative;background:#e9e3d8}
+.photo img{width:100%;height:100%;object-fit:cover}
+.photo figcaption{position:absolute;left:14px;right:14px;bottom:14px;background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:10px 14px;border-radius:14px;font-size:.85rem;color:var(--text)}
+.reasons{list-style:none;display:grid;gap:10px;margin:28px 0}
+.reasons li{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-radius:16px}
+.reasons svg{flex:none;width:26px;height:26px;color:var(--primary)}
+.pull{font:700 clamp(1.3rem,2.4vw,1.75rem)/1.3 var(--font-head);border-left:4px solid var(--donate);padding-left:18px;color:var(--secondary)}
+
+.index-wrap{margin-top:80px;background:var(--secondary);color:#fff;border-radius:var(--radius-lg);padding:clamp(28px,5vw,56px);display:grid;gap:40px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:900px){.index-wrap{grid-template-columns:.8fr 1.2fr}}
+.index-wrap .kicker{color:var(--accent)}
+.index-wrap p{color:rgba(255,255,255,.82)}
+.bars{display:grid;gap:14px}
+.bar{display:grid;grid-template-columns:52px 1fr;gap:6px 14px;align-items:center}
+.bar b{font:800 1.35rem var(--font-head);color:var(--accent)}
+.bar .track{height:10px;background:rgba(255,255,255,.12);border-radius:99px;overflow:hidden}
+.bar .fill{height:100%;width:0;background:linear-gradient(90deg,#46B3E0,var(--accent));border-radius:99px;transition:width 1.4s cubic-bezier(.2,.7,.2,1)}
+.bar small{grid-column:2;color:rgba(255,255,255,.75);font-size:.9rem;margin-top:-2px}
+.bar strong{font-weight:600}
+
+/* ---------- evolution ---------- */
+#evolution{background:var(--surface)}
+.steps{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin-top:48px;counter-reset:s}
+.step{padding:24px;border-radius:var(--radius);background:var(--bg);border:1px solid var(--line);position:relative;transition:transform .25s,box-shadow .25s}
+.step:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.step svg{width:40px;height:40px;color:var(--primary);margin-bottom:14px}
+.step h3{font-size:1.1rem;letter-spacing:.12em;font-family:var(--font-body);font-weight:800;color:var(--secondary)}
+.step p{color:var(--muted);font-size:.95rem;margin-top:6px}
+.step::after{counter-increment:s;content:"0" counter(s);position:absolute;top:18px;right:20px;font:800 1rem var(--font-head);color:rgba(10,106,147,.35)}
+.field-log{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:64px}
+.log{border-radius:var(--radius);overflow:hidden;background:var(--bg);border:1px solid var(--line)}
+.log img{aspect-ratio:4/3;object-fit:cover;width:100%}
+.log div{padding:18px 20px}
+.log b{display:block;font:800 1.9rem var(--font-head);color:var(--primary)}
+.log span{color:var(--muted);font-size:.95rem}
+
+/* ---------- films ---------- */
+#films{background:var(--secondary);color:#fff}
+#films .kicker{color:var(--accent)}
+#films .lead{color:rgba(255,255,255,.8)}
+.films{display:grid;gap:28px;grid-template-columns:minmax(0,1fr);margin-top:44px}
+@media (min-width:900px){.films{grid-template-columns:1.25fr 1fr;align-items:start}}
+.film{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius-lg);overflow:hidden}
+.film video{width:100%;aspect-ratio:1/1;object-fit:cover;background:#0c1426}
+.film div{padding:20px 22px}
+.film h3{margin-bottom:6px}
+.film p{color:rgba(255,255,255,.75);font-size:.95rem}
+
+/* ---------- programs ---------- */
+.cards{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-top:48px}
+.card{background:var(--surface);border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--line);display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.card .img{aspect-ratio:16/10;overflow:hidden;position:relative;background:#e9e3d8}
+.card .img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.card:hover .img img{transform:scale(1.05)}
+.card .badge{position:absolute;top:14px;left:14px;width:48px;height:48px;border-radius:14px;background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:grid;place-items:center;color:var(--primary)}
+.card .badge svg{width:26px;height:26px}
+.card .body{padding:24px 24px 28px}
+.card p{color:var(--muted);margin-top:10px;font-size:.97rem}
+.card ul{margin:14px 0 0 18px;color:var(--muted);font-size:.93rem}
+.solutions{margin-top:72px;display:grid;gap:12px}
+.solution{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 20px}
+.solution span:first-child{color:var(--muted)}
+.solution span:last-child{font-weight:600;color:var(--secondary)}
+.solution svg{width:26px;height:26px;color:var(--donate)}
+@media (max-width:600px){.solution{grid-template-columns:minmax(0,1fr)}.solution svg{transform:rotate(90deg)}}
+.ask{margin-top:36px;text-align:center;font:700 clamp(1.3rem,2.6vw,1.9rem)/1.35 var(--font-head);color:var(--secondary)}
+.ask em{color:var(--primary)}
+
+/* ---------- impact ---------- */
+#impact{background:var(--surface)}
+.checkpoints{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:40px 0 64px;position:relative}
+.checkpoints::before{content:"";position:absolute;top:34px;left:12%;right:12%;height:2px;background:repeating-linear-gradient(90deg,var(--primary) 0 8px,transparent 8px 14px)}
+.cp{text-align:center;position:relative}
+.cp i{display:grid;place-items:center;width:68px;height:68px;margin:0 auto 12px;border-radius:50%;background:var(--bg);border:2px solid var(--primary);font:800 1.4rem var(--font-head);font-style:normal;color:var(--primary)}
+.cp span{font-size:.85rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.roadmap{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+.phase{border-radius:var(--radius-lg);padding:30px;background:var(--bg);border:1px solid var(--line);position:relative;overflow:hidden}
+.phase .yr{font-size:.78rem;font-weight:800;letter-spacing:.18em;color:var(--primary)}
+.phase .num{font:800 clamp(3rem,6vw,4.2rem)/1 var(--font-head);color:var(--secondary);margin:14px 0 4px}
+.phase .num small{font-size:.35em;font-family:var(--font-body);font-weight:600;color:var(--muted);margin-left:6px}
+.phase p{color:var(--muted);font-size:.95rem;margin-top:12px}
+.phase.hl{background:var(--secondary);color:#fff}
+.phase.hl .yr{color:var(--accent)}
+.phase.hl .num{color:#fff}
+.phase.hl p,.phase.hl .num small{color:rgba(255,255,255,.78)}
+.formula{margin-top:56px;padding:28px;border-radius:var(--radius-lg);border:2px dashed rgba(10,106,147,.35);text-align:center;font:800 clamp(1.1rem,2.6vw,1.7rem) var(--font-head);color:var(--secondary);letter-spacing:.02em}
+.formula span{color:var(--donate)}
+.db{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px}
+.db span{font:600 .85rem var(--font-body);padding:8px 14px;border-radius:999px;background:rgba(10,106,147,.08);color:var(--primary);letter-spacing:.02em}
+
+/* ---------- gallery ---------- */
+.gallery{display:grid;grid-auto-flow:dense;gap:12px;grid-template-columns:repeat(2,1fr);grid-auto-rows:170px;margin-top:40px}
+@media (min-width:800px){.gallery{grid-template-columns:repeat(4,1fr);grid-auto-rows:210px}}
+.gallery figure{border-radius:18px;overflow:hidden;background:#e9e3d8}
+.gallery figure.tall{grid-row:span 2}
+.gallery figure.wide{grid-column:span 2}
+.gallery img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.gallery figure:hover img{transform:scale(1.05)}
+
+/* ---------- founder ---------- */
+#founder .split{grid-template-columns:minmax(0,1fr)}
+@media (min-width:900px){#founder .split{grid-template-columns:.75fr 1.25fr}}
+.founder-photo{aspect-ratio:4/5;border-radius:var(--radius-lg);overflow:hidden;background:linear-gradient(160deg,#dfeef5,#f6e7c8);box-shadow:var(--shadow)}
+.founder-photo img,.founder-photo svg{width:100%;height:100%;object-fit:cover}
+blockquote{font:500 clamp(1.15rem,2vw,1.4rem)/1.55 var(--font-head);color:var(--secondary)}
+blockquote p+p{margin-top:18px}
+.sig{margin-top:28px;display:flex;align-items:center;gap:14px}
+.sig b{font:800 1.2rem var(--font-head)}
+.sig span{display:block;color:var(--muted);font-size:.9rem}
+
+/* ---------- contact ---------- */
+#contact{background:var(--surface)}
+.join{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin:40px 0 56px}
+.join div{padding:22px;border-radius:var(--radius);background:var(--bg);border:1px solid var(--line)}
+.join svg{width:34px;height:34px;color:var(--primary);margin-bottom:10px}
+.join h3{font-size:1.05rem;font-family:var(--font-body);font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.join p{color:var(--muted);font-size:.93rem;margin-top:6px}
+.form-wrap{display:grid;gap:40px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:900px){.form-wrap{grid-template-columns:.8fr 1.2fr}}
+form{display:grid;gap:16px;background:var(--bg);border:1px solid var(--line);padding:clamp(22px,4vw,36px);border-radius:var(--radius-lg)}
+.row{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:600px){.row{grid-template-columns:1fr 1fr}}
+label{font-weight:600;font-size:.9rem;display:block;margin-bottom:6px}
+input,select,textarea{width:100%;font:inherit;font-size:1rem;padding:13px 15px;border-radius:12px;border:1.5px solid rgba(27,31,46,.2);background:#fff;color:var(--text);transition:border .2s,box-shadow .2s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 4px rgba(10,106,147,.18)}
+textarea{min-height:140px;resize:vertical}
+.err{color:#B3261E;font-size:.82rem;margin-top:4px;min-height:1em}
+.invalid{border-color:#B3261E}
+.email-line{display:inline-flex;align-items:center;gap:10px;margin-top:22px;font-weight:600;font-size:1.05rem;word-break:break-all}
+.email-line svg{width:22px;height:22px;flex:none}
+
+/* ---------- donate ---------- */
+#donate{background:linear-gradient(160deg,var(--secondary) 0%,#0E1A33 100%);color:#fff;overflow:hidden}
+#donate .kicker{color:var(--accent)}
+#donate .lead{color:rgba(255,255,255,.82)}
+.donate-grid{display:grid;gap:48px;grid-template-columns:minmax(0,1fr);align-items:center}
+@media (min-width:900px){.donate-grid{grid-template-columns:1fr 1fr}}
+.donate-box{background:rgba(255,255,255,.08);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.18);border-radius:var(--radius-lg);padding:clamp(22px,4vw,36px)}
+.amounts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}
+@media (max-width:480px){.amounts{grid-template-columns:repeat(2,1fr)}}
+.amt{padding:14px 6px;border-radius:14px;border:1.5px solid rgba(255,255,255,.3);background:transparent;color:#fff;font:700 1.1rem var(--font-body);cursor:pointer;transition:all .2s}
+.amt:hover{border-color:var(--accent)}
+.amt[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--secondary)}
+.custom{display:none;margin-bottom:14px}
+.custom.show{display:block}
+.custom input{background:rgba(255,255,255,.95)}
+.impact-note{min-height:3em;color:#FFE3A6;font-size:.95rem;margin:4px 0 18px}
+.donate-box .btn-donate{width:100%;font-size:1.05rem;padding:16px}
+.donate-box label{color:#fff}
+
+/* ---------- footer ---------- */
+footer{background:#0B1326;color:rgba(255,255,255,.75);padding:56px 0 36px;font-size:.93rem}
+footer .container{display:flex;flex-wrap:wrap;gap:28px;justify-content:space-between;align-items:flex-start}
+footer .brand{color:#fff}
+footer nav{display:flex;flex-wrap:wrap;gap:6px 22px}
+footer a{color:rgba(255,255,255,.85);text-decoration:none}
+footer a:hover{color:var(--accent)}
+.footer-tag{font:600 1rem/1.5 var(--font-head);color:#fff;margin-top:12px}
+.copy{width:100%;border-top:1px solid rgba(255,255,255,.12);padding-top:22px;font-size:.85rem}
+
+/* ---------- toast / modal ---------- */
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,calc(100% + 48px));visibility:hidden;background:var(--secondary);color:#fff;padding:14px 22px;border-radius:14px;box-shadow:var(--shadow);z-index:300;transition:transform .4s cubic-bezier(.2,.8,.2,1),visibility .4s;max-width:calc(100% - 32px)}
+.toast.show{transform:translate(-50%,0);visibility:visible}
+.modal{position:fixed;inset:0;background:rgba(11,19,38,.6);backdrop-filter:blur(6px);display:none;place-items:center;z-index:400;padding:16px}
+.modal.open{display:grid}
+.modal-card{background:var(--surface);color:var(--text);border-radius:var(--radius-lg);padding:36px;max-width:440px;width:100%;text-align:center;box-shadow:var(--shadow);animation:pop .35s ease}
+.modal-card svg{width:84px;height:84px;margin:0 auto 14px}
+.modal-card h3{font-size:1.6rem;margin-bottom:8px}
+.modal-card p{color:var(--muted);margin-bottom:22px}
+@keyframes pop{from{transform:scale(.92);opacity:0}to{transform:none;opacity:1}}
+
+/* ---------- animations ---------- */
+[data-animate]{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+[data-animate="left"]{transform:translateX(-36px)}
+[data-animate="right"]{transform:translateX(36px)}
+[data-animate].in{opacity:1;transform:none}
+.no-io [data-animate]{opacity:1;transform:none}
+@keyframes glow{0%,100%{opacity:.15}50%{opacity:1}}
+@keyframes drift{0%{transform:translate(0,0)}50%{transform:translate(14px,-18px)}100%{transform:translate(0,0)}}
+.ff{animation:glow 3.2s ease-in-out infinite, drift 9s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  [data-animate]{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<a href="#problem" class="skip">Skip to content</a>
+
+<!-- ===== Icon set ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-find" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/><circle cx="11" cy="11" r="2" fill="currentColor"/></symbol>
+    <symbol id="i-understand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></symbol>
+    <symbol id="i-act" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><circle cx="12" cy="12" r="3.2"/></symbol>
+    <symbol id="i-track" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="M5 16l4-5 4 3 6-8"/><circle cx="19" cy="6" r="1.4" fill="currentColor"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.5"/><circle cx="4.5" cy="6" r="1.8"/><circle cx="19.5" cy="6" r="1.8"/><circle cx="4.5" cy="18" r="1.8"/><circle cx="19.5" cy="18" r="1.8"/><path d="M6 7.2l4 3M18 7.2l-4 3M6 16.8l4-3M18 16.8l-4-3"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 20c0-2.5 1-4.5 4-4.5 1.3 0 2 .4 2 .4"/></symbol>
+    <symbol id="i-drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.6 6 11a6 6 0 01-12 0c0-4.4 6-11 6-11z"/><path d="M9.5 14.5a2.6 2.6 0 002.5 2.5"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5C5.5 4 9 4 12 6c3-2 6.5-2 9-.5V19c-2.5-1.5-6-1.5-9 .5-3-2-6.5-2-9-.5z"/><path d="M12 6v13.5"/></symbol>
+    <symbol id="i-laptop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="10" rx="1.5"/><path d="M2 19h20"/><path d="M10 9l-2 1.5L10 12M14 9l2 1.5-2 1.5"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0112 7.5 4.3 4.3 0 0119.5 10c0 5.4-7.5 10-7.5 10z"/></symbol>
+    <symbol id="i-school" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2.5 9 2.5 12 0v-5"/></symbol>
+    <symbol id="i-handshake" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 11l4-4 4 2 3-2 3 1 6 4"/><path d="M6 13l4 4a1.5 1.5 0 002-2M9 11l4 4a1.5 1.5 0 002-2l-3-3"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></symbol>
+    <symbol id="i-road" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3L4 21M16 3l4 18M12 5v2M12 11v2M12 17v2"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></symbol>
+    <symbol id="i-lang" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h8M8 3v2M6 5c0 4 3 7 6 8M10 5c0 3-2.5 7-6 8"/><path d="M13 21l4-9 4 9M14.5 18h5"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/></symbol>
+    <symbol id="i-ring" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="14" r="6"/><path d="M9 4h6l-3 4z"/></symbol>
+    <symbol id="i-coin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M14.5 9.2c-.5-.8-1.5-1.2-2.5-1.2-1.4 0-2.5.8-2.5 2s1.1 1.6 2.5 2 2.5.8 2.5 2-1.1 2-2.5 2c-1 0-2-.4-2.5-1.2M12 6.5V8M12 16v1.5"/></symbol>
+  </defs>
+</svg>
+
+<!-- ===== NAV ===== -->
+<header class="nav" id="nav">
+  <div class="container">
+    <a href="#home" class="brand" aria-label="Girls Beyond Borders home">
+      <svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#0A6A93"/><path d="M4 20h32M20 2c-6 6-6 30 0 36M20 2c6 6 6 30 0 36" stroke="#fff" stroke-opacity=".55" stroke-width="1.6" fill="none"/><circle cx="27" cy="12" r="4.5" fill="#F2B33D"/><circle cx="27" cy="12" r="8" fill="#F2B33D" opacity=".25"/></svg>
+      <span>Girls Beyond Borders<small>Project Firefly</small></span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">HOME</a></li>
+      <li><a href="#founder">ABOUT US</a></li>
+      <li><a href="#contact">CONTACT</a></li>
+      <li><a href="#donate" class="btn btn-donate">DONATE</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+<!-- ===== HERO ===== -->
+<section id="home">
+  <div class="hero-bg" id="heroBg" role="img" aria-label="Students hold their new Girls Beyond Borders backpacks behind volunteers with the GBB banner"></div>
+  <svg class="fireflies" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs><radialGradient id="ffg"><stop offset="0" stop-color="#FFE7A3"/><stop offset=".35" stop-color="#F2B33D" stop-opacity=".7"/><stop offset="1" stop-color="#F2B33D" stop-opacity="0"/></radialGradient></defs>
+    <g fill="url(#ffg)">
+      <circle class="ff" cx="140" cy="220" r="14" style="animation-delay:0s,.2s"/>
+      <circle class="ff" cx="320" cy="140" r="10" style="animation-delay:1.1s,2s"/>
+      <circle class="ff" cx="980" cy="180" r="16" style="animation-delay:.6s,1s"/>
+      <circle class="ff" cx="1100" cy="330" r="10" style="animation-delay:2s,.5s"/>
+      <circle class="ff" cx="760" cy="110" r="9" style="animation-delay:1.6s,3s"/>
+      <circle class="ff" cx="560" cy="260" r="12" style="animation-delay:.3s,4s"/>
+      <circle class="ff" cx="60" cy="420" r="9" style="animation-delay:2.4s,1.5s"/>
+      <circle class="ff" cx="880" cy="420" r="11" style="animation-delay:1.3s,2.6s"/>
+    </g>
+  </svg>
+  <div class="container hero-inner">
+    <div data-animate>
+      <span class="hero-tag">Project Firefly · Myanmar Girls Education Initiative</span>
+      <h1>Find the girls. Understand the barriers. <em>Build a path back to school.</em></h1>
+      <p class="hero-sub">Across rural and ethnic minority communities in Myanmar, girls leave school for reasons that are often invisible. We go into communities to find them, one girl and one barrier at a time.</p>
+      <div class="hero-ctas">
+        <a href="#evolution" class="btn btn-ghost">See our approach</a>
+        <a href="#donate" class="btn btn-donate">Support a girl's return</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROBLEM ===== -->
+<section id="problem">
+  <div class="container">
+    <div class="split">
+      <div data-animate="left">
+        <span class="kicker">The Challenge</span>
+        <h2>A girl can leave school for many reasons.</h2>
+        <p class="lead" style="margin-top:18px">There is rarely a single reason why a girl stops going to school, and traditional aid often treats every girl as if she faces the same problem.</p>
+        <ul class="reasons">
+          <li><svg><use href="#i-road"/></svg><span>For one girl, school may simply be <strong>too far away</strong>.</span></li>
+          <li><svg><use href="#i-home"/></svg><span>Another spends her day <strong>caring for younger siblings</strong>.</span></li>
+          <li><svg><use href="#i-lang"/></svg><span>Another struggles because the <strong>language at home</strong> differs from the language in class.</span></li>
+          <li><svg><use href="#i-ring"/></svg><span>Some face <strong>pressure to marry early</strong>.</span></li>
+          <li><svg><use href="#i-drop"/></svg><span>Others miss school without <strong>safe, private sanitation</strong> or adolescent health education.</span></li>
+        </ul>
+        <p class="pull">We believe every girl deserves to be understood individually.</p>
+      </div>
+      <figure class="photo" data-animate="right" style="aspect-ratio:4/5">
+        <img src="assets/img/problem.jpg" alt="A Girls Beyond Borders volunteer sits with a young girl during a family home visit" loading="lazy">
+        <figcaption>Home visit: understanding one family's barriers up close.</figcaption>
+      </figure>
+    </div>
+
+    <div class="index-wrap" data-animate>
+      <div>
+        <span class="kicker">Data for Good</span>
+        <h3 style="font-size:clamp(1.7rem,3vw,2.4rem)">The Girl Education Risk Index</h3>
+        <p style="margin-top:14px">At the center of Project Firefly is a seven-dimension framework designed to identify the factors that place a girl at risk of leaving school.</p>
+        <p style="margin-top:14px;color:var(--accent);font-weight:600">The goal is not simply to collect data. The goal is to turn data into action.</p>
+      </div>
+      <div class="bars" id="bars">
+        <div class="bar"><b>20%</b><div class="track"><div class="fill" data-w="100"></div></div><small><strong>Distance to school</strong> · How far does she travel each day?</small></div>
+        <div class="bar"><b>20%</b><div class="track"><div class="fill" data-w="100"></div></div><small><strong>Household income</strong> · Does financial pressure threaten her education?</small></div>
+        <div class="bar"><b>15%</b><div class="track"><div class="fill" data-w="75"></div></div><small><strong>Domestic responsibilities</strong> · Childcare, housework or farm labor?</small></div>
+        <div class="bar"><b>15%</b><div class="track"><div class="fill" data-w="75"></div></div><small><strong>Language barriers</strong> · Can she understand the classroom language?</small></div>
+        <div class="bar"><b>10%</b><div class="track"><div class="fill" data-w="50"></div></div><small><strong>School facilities</strong> · Water, sanitation and privacy?</small></div>
+        <div class="bar"><b>10%</b><div class="track"><div class="fill" data-w="50"></div></div><small><strong>Safety concerns</strong> · Conflict, displacement or an unsafe journey?</small></div>
+        <div class="bar"><b>10%</b><div class="track"><div class="fill" data-w="50"></div></div><small><strong>Early marriage risk</strong> · Is she under pressure to leave and marry?</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EVOLUTION ===== -->
+<section id="evolution">
+  <div class="container">
+    <div data-animate>
+      <span class="kicker">Our Approach</span>
+      <h2>From general aid to precision educational support.</h2>
+      <p class="lead" style="margin-top:18px">Girls Beyond Borders started as a student project and grew through fieldwork in monastery and nunnery schools and in family homes in Myanmar. That experience became Project Firefly, which combines community engagement, field research, technology and long-term educational support around one simple principle.</p>
+    </div>
+    <div class="steps">
+      <div class="step" data-animate><svg><use href="#i-find"/></svg><h3>FIND</h3><p>Identify out-of-school and high-risk girls through household surveys and community outreach.</p></div>
+      <div class="step" data-animate><svg><use href="#i-understand"/></svg><h3>UNDERSTAND</h3><p>Evaluate the specific educational barriers affecting each girl.</p></div>
+      <div class="step" data-animate><svg><use href="#i-act"/></svg><h3>ACT</h3><p>Develop individualized interventions based on what each girl actually needs.</p></div>
+      <div class="step" data-animate><svg><use href="#i-track"/></svg><h3>TRACK</h3><p>Follow outcomes over time, not just the first day back in class.</p></div>
+      <div class="step" data-animate><svg><use href="#i-scale"/></svg><h3>SCALE</h3><p>Use anonymized pilot evidence to improve the model and reach new communities.</p></div>
+    </div>
+
+    <div class="field-log">
+      <article class="log" data-animate><img src="assets/img/field-nunnery.jpg" alt="Schoolgirls gather with Girls Beyond Borders volunteers and the GBB banner" loading="lazy"><div><b>720</b><span>students reached at a nunnery school, where we introduced the project and listened to the girls.</span></div></article>
+      <article class="log" data-animate><img src="assets/img/field-monastery.jpg" alt="Monastery school students pose with a volunteer holding the Girls Beyond Borders banner" loading="lazy"><div><b>220</b><span>students at a monastery school, where our team shared the project and provided dinner.</span></div></article>
+      <article class="log" data-animate><img src="assets/img/field-homevisit.jpg" alt="A volunteer sits with a family inside their home during a home visit" loading="lazy"><div><b>3</b><span>families visited at home, testing the in-person interviews at the heart of our model.</span></div></article>
+      <article class="log" data-animate><img src="assets/img/field-volunteers.jpg" alt="The volunteer team in blue GBB shirts holding the Girls Beyond Borders banner" loading="lazy"><div><b>1st</b><span>round of local volunteer recruitment toward our Village Education Fellows network.</span></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FILMS ===== -->
+<section id="films" aria-labelledby="films-h">
+  <div class="container">
+    <div data-animate>
+      <span class="kicker">From the Field</span>
+      <h2 id="films-h">See Project Firefly in Myanmar.</h2>
+      <p class="lead" style="margin-top:18px">The two films below follow our team from temple classrooms to the homes of the girls we hope to keep in school.</p>
+    </div>
+    <div class="films">
+      <article class="film" data-animate="left">
+        <video controls preload="metadata" playsinline poster="assets/video/story-poster.jpg">
+          <source src="assets/video/story.mp4" type="video/mp4">
+          Your browser does not support embedded video.
+        </video>
+        <div><h3>The Girls Beyond Borders Story</h3><p>A full look at the journey, from monastery school presentations to a home visit with one girl and her family. About 8 minutes.</p></div>
+      </article>
+      <article class="film" data-animate="right">
+        <video controls preload="metadata" playsinline poster="assets/video/field-poster.jpg">
+          <source src="assets/video/field.mp4" type="video/mp4">
+          Your browser does not support embedded video.
+        </video>
+        <div><h3>Field Visit Highlights</h3><p>Shared meals, lessons with young nuns and school supplies delivered door to door. About 4 minutes.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROGRAMS ===== -->
+<section id="programs">
+  <div class="container">
+    <div data-animate>
+      <span class="kicker">Programs</span>
+      <h2>One girl. One barrier. One solution.</h2>
+      <p class="lead" style="margin-top:18px">Not every out-of-school girl needs the same kind of help. Each program targets a specific part of the path back to school, and a path to staying there.</p>
+    </div>
+    <div class="cards">
+      <article class="card" data-animate>
+        <div class="img"><img src="assets/img/program1.jpg" alt="A volunteer visits a mother and daughter at their home" loading="lazy"><span class="badge"><svg><use href="#i-map"/></svg></span></div>
+        <div class="body"><h3>Village Education Map</h3><p>Household surveys combined with GPS mapping. Each girl is represented by an anonymous ID to protect her privacy. The map shows where exclusion is concentrated and where limited resources can do the most.</p>
+          <ul><li>Villages, schools and out-of-school girls</li><li>High-risk girls and local risk factors</li><li>A Girls Education Dashboard</li></ul></div>
+      </article>
+      <article class="card" data-animate>
+        <div class="img"><img src="assets/img/program2.jpg" alt="A volunteer with two young local women giving a thumbs up" loading="lazy"><span class="badge"><svg><use href="#i-people"/></svg></span></div>
+        <div class="body"><h3>Village Education Fellows</h3><p>Trained local volunteers, with priority given to young women and local high school graduates, who conduct surveys, interview families, build individual action plans and follow each girl after she returns to school.</p>
+          <ul><li>Community conversations and parent engagement</li><li>Female role-model sharing</li></ul></div>
+      </article>
+      <article class="card" data-animate>
+        <div class="img"><img src="assets/img/program3.jpg" alt="Young nuns wash their hands at a water basin before a meal" loading="lazy"><span class="badge"><svg><use href="#i-drop"/></svg></span></div>
+        <div class="body"><h3>Keeping Girls in School</h3><p>Returning to school is only the beginning. We look at the everyday conditions that quietly push girls back out, then work with schools to fix them.</p>
+          <ul><li>Separate restrooms with working locks</li><li>Clean water and adequate privacy</li><li>Menstrual and adolescent health education</li></ul></div>
+      </article>
+      <article class="card" data-animate>
+        <div class="img"><img src="assets/img/program4.jpg" alt="Volunteers teach a class of young nuns at a blackboard" loading="lazy"><span class="badge"><svg><use href="#i-book"/></svg></span></div>
+        <div class="body"><h3>Girls Learning Hubs</h3><p>Community spaces that offer English, mathematics, digital literacy and tutoring. U.S. student clubs can contribute recorded lessons, and content is prepared in advance wherever internet access is limited.</p>
+          <ul><li>Offline-ready lessons</li><li>Remote academic support from U.S. schools</li></ul></div>
+      </article>
+      <article class="card" data-animate>
+        <div class="img"><img src="assets/img/program5.jpg" alt="Volunteers present with a laptop and microphone to monastery students" loading="lazy"><span class="badge"><svg><use href="#i-laptop"/></svg></span></div>
+        <div class="body"><h3>Girl Digital Leaders</h3><p>Moving from digital access to digital empowerment, with the aim of building the knowledge, confidence and skills girls need to lead in their own communities.</p>
+          <ul><li>Computer basics and office software</li><li>Internet research and digital literacy</li><li>Responsible use of AI tools</li></ul></div>
+      </article>
+      <article class="card" data-animate>
+        <div class="img"><img src="assets/img/program6.jpg" alt="A volunteer hands a GBB school backpack to a young nun" loading="lazy"><span class="badge"><svg><use href="#i-heart"/></svg></span></div>
+        <div class="body"><h3>Individual Action Plans</h3><p>Targeted support matched to each girl's barrier, whether that means a bicycle, a scholarship, language tutoring, family engagement or community advocacy against early marriage.</p></div>
+      </article>
+    </div>
+
+    <div class="solutions" aria-label="Examples of barrier-to-solution matching">
+      <div class="solution" data-animate><span>Lives far from school</span><svg><use href="#i-arrow"/></svg><span>A bicycle</span></div>
+      <div class="solution" data-animate><span>Financial hardship</span><svg><use href="#i-arrow"/></svg><span>Educational support or a scholarship</span></div>
+      <div class="solution" data-animate><span>Struggles with the classroom language</span><svg><use href="#i-arrow"/></svg><span>Language tutoring</span></div>
+      <div class="solution" data-animate><span>Heavy household responsibilities</span><svg><use href="#i-arrow"/></svg><span>Family engagement</span></div>
+      <div class="solution" data-animate><span>At risk of early marriage</span><svg><use href="#i-arrow"/></svg><span>Community-based intervention and advocacy</span></div>
+    </div>
+    <p class="ask" data-animate>We do not ask, “What can we give?”<br>We ask, <em>“What is preventing this girl from learning?”</em></p>
+  </div>
+</section>
+
+<!-- ===== IMPACT ===== -->
+<section id="impact">
+  <div class="container">
+    <div data-animate>
+      <span class="kicker">Measuring What Matters</span>
+      <h2>We don't stop counting when a girl returns to school.</h2>
+      <p class="lead" style="margin-top:18px">We track whether each girl returns to school and also whether she stays, learns and keeps progressing, with follow-up checkpoints for every participant.</p>
+    </div>
+    <div class="checkpoints" data-animate>
+      <div class="cp"><i>1</i><span>Month</span></div>
+      <div class="cp"><i>3</i><span>Months</span></div>
+      <div class="cp"><i>6</i><span>Months</span></div>
+      <div class="cp"><i>12</i><span>Months</span></div>
+    </div>
+
+    <span class="kicker" data-animate>Our Roadmap</span>
+    <h3 style="font-size:clamp(1.6rem,3vw,2.3rem);margin-bottom:28px" data-animate>Start small. Measure carefully. Scale what works.</h3>
+    <div class="roadmap">
+      <div class="phase" data-animate><span class="yr">YEAR 1 — PILOT</span><div class="num" data-count="10">0<small>villages</small></div><p>1 pilot area · 500 households surveyed · goal: identify 50–100 out-of-school girls. Build the survey system, train local volunteers, develop the database and test individual interventions.</p></div>
+      <div class="phase hl" data-animate><span class="yr">YEAR 2 — EXPAND</span><div class="num" data-count="50">0<small>villages</small></div><p>Expand the digital database, develop community learning centers and refine the intervention model with pilot evidence.</p></div>
+      <div class="phase" data-animate><span class="yr">YEAR 3 — SCALE</span><div class="num" data-count="200" data-suffix="+">0<small>villages</small></div><p>Grow a network of U.S. high school clubs, build nonprofit partnerships and publish an educational impact report.</p></div>
+    </div>
+
+    <div class="formula" data-animate>MAP <span>+</span> DATA <span>+</span> HOME VISITS <span>+</span> LONG-TERM TRACKING
+      <div class="db"><span>Household Information</span><span>Girl Profile</span><span>Risk Assessment</span><span>Home Visit Records</span><span>Educational Outcomes</span></div>
+    </div>
+    <p class="lead" style="margin:28px auto 0;text-align:center" data-animate>Educational inequality is not solved by one donation. It is solved when every girl is seen, every barrier is understood, and every community has the tools to create lasting change.</p>
+
+    <div class="gallery" aria-label="Photos from the field">
+      <figure class="wide tall" data-animate><img src="assets/img/g1.jpg" alt="Volunteers and monastery students gather for a group photo with the GBB banner" loading="lazy"></figure>
+      <figure data-animate><img src="assets/img/g2.jpg" alt="A volunteer serves a meal to young nuns" loading="lazy"></figure>
+      <figure class="tall" data-animate><img src="assets/img/g3.jpg" alt="A volunteer holds the GBB banner beneath a temple gate" loading="lazy"></figure>
+      <figure data-animate><img src="assets/img/g4.jpg" alt="A volunteer carries a stack of books for students" loading="lazy"></figure>
+      <figure class="wide" data-animate><img src="assets/img/g5.jpg" alt="Schoolgirls in uniform sit with volunteers and the GBB banner" loading="lazy"></figure>
+      <figure class="wide" data-animate><img src="assets/img/g6.jpg" alt="A young girl and a volunteer smile during a home visit" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOUNDER ===== -->
+<section id="founder">
+  <div class="container">
+    <div class="split">
+      <div class="founder-photo" data-animate="left" id="founderPhoto">
+        <img src="assets/img/founder.jpg" alt="Olivia Huo, founder of Girls Beyond Borders, standing at a monastery gate in Myanmar" loading="lazy" style="object-position:center 30%">
+      </div>
+      <div data-animate="right">
+        <span class="kicker">About Us · A Message from the Founder</span>
+        <h2 style="margin-bottom:26px">Every girl seen. Every barrier understood.</h2>
+        <blockquote>
+          <p>“The education of rural girls in Myanmar is a complex social issue. Short-term material donations alone cannot break cycles of school dropout and early marriage.</p>
+          <p>I believe we must first understand the difficulties facing each individual girl, use data to identify patterns that might otherwise remain invisible, and work alongside local communities to create solutions that can last.</p>
+          <p>Education should do more than bring a girl back into a classroom. It should give her the knowledge, confidence and skills to shape her own future — and, one day, help shape the future of her community.”</p>
+        </blockquote>
+        <div class="sig">
+          <svg width="46" height="46" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#FBF7F0" stroke="#0A6A93" stroke-width="2"/><circle cx="20" cy="20" r="5" fill="#F2B33D"/><circle cx="20" cy="20" r="11" fill="#F2B33D" opacity=".2"/></svg>
+          <div><b>Olivia Huo (Huo Yutong)</b><span>Founder, Girls Beyond Borders</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+  <div class="container">
+    <div data-animate>
+      <span class="kicker">Join Project Firefly</span>
+      <h2>Help us turn data into opportunity.</h2>
+      <p class="lead" style="margin-top:18px">We welcome students, educators, researchers, volunteers and organizations who believe every girl deserves the opportunity to learn.</p>
+    </div>
+    <div class="join">
+      <div data-animate><svg><use href="#i-heart"/></svg><h3>Volunteer</h3><p>Support tutoring, educational content and student-led initiatives.</p></div>
+      <div data-animate><svg><use href="#i-school"/></svg><h3>Start a School Chapter</h3><p>Bring Girls Beyond Borders to your school and connect students across borders.</p></div>
+      <div data-animate><svg><use href="#i-handshake"/></svg><h3>Collaborate</h3><p>Schools, nonprofits, researchers and education partners are welcome.</p></div>
+      <div data-animate><svg><use href="#i-coin"/></svg><h3>Support the Project</h3><p>Help expand access and targeted support for girls facing barriers.</p></div>
+    </div>
+    <div class="form-wrap">
+      <div data-animate="left">
+        <h3 style="font-size:1.8rem">Write to us</h3>
+        <p style="color:var(--muted);margin-top:10px">Tell us how you would like to get involved and we'll get back to you.</p>
+        <a class="email-line" href="mailto:hello@girlsbeyondborders.org"><svg><use href="#i-mail"/></svg>hello@girlsbeyondborders.org</a>
+      </div>
+      <form id="contactForm" novalidate data-animate="right">
+        <div class="row">
+          <div><label for="cName">Name</label><input id="cName" name="name" required autocomplete="name"><div class="err" aria-live="polite"></div></div>
+          <div><label for="cEmail">Email</label><input id="cEmail" name="email" type="email" required autocomplete="email"><div class="err" aria-live="polite"></div></div>
+        </div>
+        <div><label for="cType">I'm interested in</label>
+          <select id="cType" name="type"><option>Volunteering</option><option>Starting a school chapter</option><option>Collaborating</option><option>Supporting the project</option><option>Something else</option></select></div>
+        <div><label for="cMsg">Message</label><textarea id="cMsg" name="message" required></textarea><div class="err" aria-live="polite"></div></div>
+        <button class="btn btn-primary" type="submit">Send message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DONATE ===== -->
+<section id="donate">
+  <div class="container donate-grid">
+    <div data-animate="left">
+      <span class="kicker">Support the Project</span>
+      <h2>Light the path for one more girl.</h2>
+      <p class="lead" style="margin:18px 0 28px">Every gift funds the fieldwork, Fellows and targeted support that bring girls back to school and help them stay.</p>
+      <!-- Donation graphic: lantern-like firefly glowing over an open book -->
+      <svg viewBox="0 0 360 220" width="360" aria-hidden="true" style="max-width:100%">
+        <defs><radialGradient id="dg"><stop offset="0" stop-color="#FFE7A3"/><stop offset=".4" stop-color="#F2B33D" stop-opacity=".55"/><stop offset="1" stop-color="#F2B33D" stop-opacity="0"/></radialGradient></defs>
+        <circle cx="180" cy="80" r="80" fill="url(#dg)"/>
+        <ellipse cx="180" cy="80" rx="9" ry="13" fill="#FFE7A3"/>
+        <path d="M171 74c-14-12-26-8-24 2 2 8 14 8 24 2zM189 74c14-12 26-8 24 2-2 8-14 8-24 2z" fill="#FFFFFF" opacity=".75"/>
+        <path d="M60 190c40-24 80-24 120 0 40-24 80-24 120 0v-60c-40-24-80-24-120 0-40-24-80-24-120 0z" fill="#FBF7F0"/>
+        <path d="M180 130v60" stroke="#16284A" stroke-width="3"/>
+        <path d="M80 150c25-10 55-10 80 0M80 166c25-10 55-10 80 0M200 150c25-10 55-10 80 0M200 166c25-10 55-10 80 0" stroke="#46B3E0" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <g fill="#F2B33D"><circle cx="110" cy="46" r="3"/><circle cx="262" cy="36" r="3.5"/><circle cx="292" cy="96" r="2.5"/><circle cx="70" cy="100" r="2.5"/></g>
+      </svg>
+    </div>
+    <div class="donate-box" data-animate="right">
+      <h3 style="font-size:1.6rem">Choose your gift</h3>
+      <div class="amounts" role="group" aria-label="Donation amount">
+        <button type="button" class="amt" data-amt="25" aria-pressed="false">$25</button>
+        <button type="button" class="amt" data-amt="50" aria-pressed="true">$50</button>
+        <button type="button" class="amt" data-amt="100" aria-pressed="false">$100</button>
+        <button type="button" class="amt" data-amt="custom" aria-pressed="false">Other</button>
+      </div>
+      <div class="custom" id="customWrap"><label for="customAmt">Custom amount (USD)</label><input id="customAmt" type="number" min="1" step="1" inputmode="numeric" placeholder="e.g. 75"></div>
+      <p class="impact-note" id="impactNote" aria-live="polite"></p>
+      <button class="btn btn-donate" id="donateBtn" type="button">Continue</button>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container">
+    <div>
+      <a href="#home" class="brand"><span>Girls Beyond Borders<small>Project Firefly</small></span></a>
+      <p class="footer-tag">Data finds the barriers.<br>Communities create the change.<br>Girls build the future.</p>
+    </div>
+    <nav aria-label="Footer">
+      <a href="#home">Home</a><a href="#problem">Challenge</a><a href="#evolution">Approach</a><a href="#programs">Programs</a><a href="#impact">Impact</a><a href="#founder">About Us</a><a href="#contact">Contact</a><a href="#donate">Donate</a>
+    </nav>
+    <div><a class="email-line" style="margin:0" href="mailto:hello@girlsbeyondborders.org"><svg><use href="#i-mail"/></svg>hello@girlsbeyondborders.org</a></div>
+    <p class="copy">© <span id="yr">2026</span> Girls Beyond Borders · Project Firefly: Myanmar Girls Education Initiative</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-card">
+    <svg viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="40" fill="#F2B33D" opacity=".2"/><circle cx="42" cy="42" r="26" fill="#F2B33D"/><path d="M30 43l8 8 16-17" stroke="#16284A" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <h3 id="modalTitle">Thank you!</h3>
+    <p id="modalText"></p>
+    <button class="btn btn-primary" id="modalClose" type="button">Close</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var d=document;
+  d.getElementById('yr').textContent=new Date().getFullYear();
+
+  /* ---- Smooth scroll polyfill ---- */
+  var nativeSmooth='scrollBehavior' in d.documentElement.style;
+  function smoothTo(y){
+    if(nativeSmooth){window.scrollTo({top:y,behavior:'smooth'});return;}
+    var start=window.pageYOffset,diff=y-start,t0=null,dur=600;
+    function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);var e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;window.scrollTo(0,start+diff*e);if(p<1)requestAnimationFrame(step);}
+    requestAnimationFrame(step);
+  }
+  d.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var id=a.getAttribute('href');if(id.length<2)return;
+      var el=d.querySelector(id);if(!el)return;
+      e.preventDefault();
+      smoothTo(el.getBoundingClientRect().top+window.pageYOffset-(id==='#home'?0:72));
+      links.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');
+      history.replaceState(null,'',id);
+    });
+  });
+
+  /* ---- Nav ---- */
+  var nav=d.getElementById('nav'),menuBtn=d.getElementById('menuBtn'),links=d.getElementById('navLinks'),heroBg=d.getElementById('heroBg');
+  menuBtn.addEventListener('click',function(){var o=links.classList.toggle('open');menuBtn.setAttribute('aria-expanded',o);nav.classList.add('scrolled');});
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function onScroll(){
+    var y=window.pageYOffset;
+    nav.classList.toggle('scrolled',y>40||links.classList.contains('open'));
+    if(!reduce&&y<window.innerHeight)heroBg.style.transform='translateY('+(y*.25)+'px)';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  /* ---- Scroll animations ---- */
+  var animEls=d.querySelectorAll('[data-animate]');
+  function reveal(el){
+    el.classList.add('in');
+    if(el.id==='bars'||el.querySelector('#bars'))fillBars();
+    el.querySelectorAll('[data-count]').forEach(count);
+    if(el.hasAttribute('data-count'))count(el);
+  }
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){if(en.isIntersecting){reveal(en.target);io.unobserve(en.target);}});
+    },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+    animEls.forEach(function(el,i){
+      var sib=el.parentElement?Array.prototype.indexOf.call(el.parentElement.children,el):0;
+      el.style.transitionDelay=Math.min(sib,6)*70+'ms';
+      io.observe(el);
+    });
+  }else{
+    d.documentElement.classList.add('no-io');
+    animEls.forEach(reveal);
+  }
+  var barsDone=false;
+  function fillBars(){if(barsDone)return;barsDone=true;d.querySelectorAll('.fill').forEach(function(f){f.style.width=f.getAttribute('data-w')+'%';});}
+  function count(el){
+    if(el.dataset.done)return;el.dataset.done=1;
+    var target=+el.dataset.count,suffix=el.dataset.suffix||'',small=el.querySelector('small'),t0=null;
+    function tick(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/1300,1);el.firstChild.nodeValue=Math.round(target*(1-Math.pow(1-p,3)))+(p===1?suffix:'');if(p<1)requestAnimationFrame(tick);}
+    if(reduce){el.firstChild.nodeValue=target+suffix;}else requestAnimationFrame(tick);
+  }
+
+  /* ---- Only one video plays at a time ---- */
+  var vids=d.querySelectorAll('video');
+  vids.forEach(function(v){v.addEventListener('play',function(){vids.forEach(function(o){if(o!==v)o.pause();});});});
+
+  /* ---- Image fallback: replace any failed image with an inline SVG ---- */
+  var fallback='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="#16284A"/><circle cx="200" cy="140" r="60" fill="#F2B33D" opacity=".2"/><circle cx="200" cy="140" r="14" fill="#F2B33D"/><text x="200" y="250" fill="#FBF7F0" font-family="Georgia" font-size="20" text-anchor="middle">Project Firefly</text></svg>');
+  d.querySelectorAll('img').forEach(function(img){img.addEventListener('error',function(){if(img.src!==fallback)img.src=fallback;});});
+
+
+  /* ---- Toast ---- */
+  var toast=d.getElementById('toast'),tt;
+  function showToast(msg){toast.textContent=msg;toast.classList.add('show');clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove('show');},4200);}
+
+  /* ---- Contact form ---- */
+  var form=d.getElementById('contactForm');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();var ok=true;
+    ['cName','cEmail','cMsg'].forEach(function(id){
+      var f=d.getElementById(id),err=f.parentElement.querySelector('.err'),msg='';
+      if(!f.value.trim())msg='This field is required.';
+      else if(f.type==='email'&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.value.trim()))msg='Please enter a valid email address.';
+      err.textContent=msg;f.classList.toggle('invalid',!!msg);f.setAttribute('aria-invalid',!!msg);
+      if(msg&&ok){ok=false;f.focus();}
+    });
+    if(!ok)return;
+    var name=d.getElementById('cName').value.trim().split(' ')[0];
+    form.reset();
+    showToast('Thank you, '+name+'! Your message has been received and we will be in touch soon.');
+  });
+
+  /* ---- Donate ---- */
+  var amt=50,btns=d.querySelectorAll('.amt'),customWrap=d.getElementById('customWrap'),customAmt=d.getElementById('customAmt'),note=d.getElementById('impactNote');
+  var notes={25:'$25 can help cover a Fellow’s household survey visits in one village.',50:'$50 can help provide school supplies and a backpack for a girl returning to class.',100:'$100 can help put a bicycle under a girl who lives far from school.'};
+  function setNote(){
+    if(amt==='custom'){var v=+customAmt.value;note.textContent=v>0?'$'+v+' goes directly toward fieldwork and targeted support for girls.':'Enter any amount you’d like to give.';}
+    else note.textContent=notes[amt];
+  }
+  btns.forEach(function(b){b.addEventListener('click',function(){
+    btns.forEach(function(o){o.setAttribute('aria-pressed','false');});b.setAttribute('aria-pressed','true');
+    amt=b.dataset.amt==='custom'?'custom':+b.dataset.amt;
+    customWrap.classList.toggle('show',amt==='custom');if(amt==='custom')customAmt.focus();setNote();
+  });});
+  customAmt.addEventListener('input',setNote);setNote();
+  var modal=d.getElementById('modal'),lastFocus;
+  d.getElementById('donateBtn').addEventListener('click',function(){
+    var v=amt==='custom'?+customAmt.value:amt;
+    if(!(v>0)){note.textContent='Please enter a valid amount.';customAmt.focus();return;}
+    lastFocus=d.activeElement;
+    d.getElementById('modalText').textContent='You chose to give $'+v+' to Project Firefly. This is a demo, so no payment was taken. Please email us to arrange your gift.';
+    modal.classList.add('open');d.getElementById('modalClose').focus();
+  });
+  function closeModal(){modal.classList.remove('open');lastFocus&&lastFocus.focus();}
+  d.getElementById('modalClose').addEventListener('click',closeModal);
+  modal.addEventListener('click',function(e){if(e.target===modal)closeModal();});
+  d.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('open'))closeModal();});
+})();
+</script>
+</body>
+</html>
